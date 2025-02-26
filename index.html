@@ -28,8 +28,10 @@
       position: relative;
       background: #f2f2f2;
       overflow: hidden;
+      display: block;
+      margin: 20px auto;
     }
-    .game-container canvas {
+    canvas {
       width: 100%;
       height: 100%;
     }
@@ -39,18 +41,45 @@
       color: white;
     }
   </style>
-  <!-- Original JavaScript für das Dino-Spiel -->
-  <script src="https://cdn.jsdelivr.net/gh/MicrosoftEdge/DinoGame@latest/dino.js"></script>
 </head>
-<body
- 
+<body>
+  <header>
+    <h1>Google Chrome Dino Game</h1>
+    <p>Play the classic Dino Game right now, whether you’re offline or online. Dodge obstacles, jump over cacti, and enjoy hours of fun!</p>
+  </header>
+
+  <section class="game-info">
+    <h2>What is Google Chrome Dino Game?</h2>
+    <p>The Google Chrome Dino Game is a fun and challenging game that appears when you're disconnected from the internet while using Google Chrome. The game features a cute dinosaur character that you control to jump over obstacles like cacti and avoid running into birds, all while keeping an eye on your score!</p>
+  </section>
+
+  <section class="how-to-play">
+    <h2>How to Play Google Chrome Dino Game</h2>
+    <p>Playing the Google Chrome Dino Game is easy! Simply press the spacebar to jump and avoid obstacles. Keep playing to improve your score, and see how long you can last without crashing!</p>
+  </section>
+
+  <section class="play-now">
+    <h2>Play the Game Now</h2>
     <div class="game-container">
       <!-- Canvas wird von JavaScript erzeugt -->
+      <canvas id="dinoGameCanvas"></canvas>
     </div>
-
+  </section>
 
   <footer>
     <p>&copy; 2025 Play-Google-Dino-Game. All Rights Reserved.</p>
   </footer>
+
+  <!-- Original JavaScript für das Dino-Spiel -->
+  <script>
+    // JavaScript Code für das Dino-Spiel
+    var canvas = document.getElementById('dinoGameCanvas');
+    var ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = 400;
+
+    var dinoGame = new DinoGame(canvas, ctx);
+    dinoGame.start();
+  </script>
 </body>
 </html>
