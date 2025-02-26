@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-site-verification" content="twtU88hKfz4mdbZgR9fw28x2mRWzgRFMeOhXowJjRrk" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Play the Google Chrome Dino Game offline and enjoy the fun experience of jumping and dodging obstacles in this popular browser game.">
   <meta name="keywords" content="Google Chrome Dino Game, Dino Game, Play Google Dino Game, Google Dino offline game, Play Dino Game online">
   <meta name="author" content="Play-Google-Dino-Game">
-  <title>Play Google Chrome Dino Game </title>
+  <title>Play Google Chrome Dino Game</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -27,6 +26,8 @@
     .game-container {
       height: 400px;
       position: relative;
+      background: #f2f2f2;
+      overflow: hidden;
     }
     .game-container canvas {
       width: 100%;
@@ -38,115 +39,8 @@
       color: white;
     }
   </style>
-  <script>
-    // Open-Source Dino Game Script
-    var DinoGame = {
-      canvas: null,
-      ctx: null,
-      dino: null,
-      obstacles: [],
-      gameInterval: null,
-      isGameOver: false,
-      score: 0,
-
-      init: function() {
-        this.canvas = document.createElement('canvas');
-        document.querySelector('.game-container').appendChild(this.canvas);
-        this.ctx = this.canvas.getContext('2d');
-        this.canvas.width = 600;
-        this.canvas.height = 200;
-
-        this.dino = { x: 50, y: 150, width: 20, height: 20, dy: 0 };
-        this.obstacles = [];
-        this.score = 0;
-        this.isGameOver = false;
-
-        this.gameInterval = setInterval(this.gameLoop.bind(this), 1000 / 60); // 60 FPS
-
-        window.addEventListener('keydown', this.handleKeyDown.bind(this));
-      },
-
-      handleKeyDown: function(e) {
-        if (e.code === 'Space' && !this.isGameOver) {
-          this.dino.dy = -10; // Jump!
-        }
-      },
-
-      spawnObstacle: function() {
-        var height = Math.random() * 20 + 20;
-        var obstacle = { x: 600, y: 150 - height, width: 20, height: height };
-        this.obstacles.push(obstacle);
-      },
-
-      moveObstacles: function() {
-        for (var i = 0; i < this.obstacles.length; i++) {
-          var obstacle = this.obstacles[i];
-          obstacle.x -= 3;
-          if (obstacle.x + obstacle.width < 0) {
-            this.obstacles.splice(i, 1);
-            this.score += 10;
-            i--;
-          }
-        }
-      },
-
-      checkCollisions: function() {
-        for (var i = 0; i < this.obstacles.length; i++) {
-          var obstacle = this.obstacles[i];
-          if (this.dino.x + this.dino.width > obstacle.x && this.dino.x < obstacle.x + obstacle.width &&
-              this.dino.y + this.dino.height > obstacle.y) {
-            this.isGameOver = true;
-            clearInterval(this.gameInterval);
-            alert("Game Over! Your Score: " + this.score);
-            return;
-          }
-        }
-      },
-
-      gameLoop: function() {
-        if (this.isGameOver) return;
-
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        // Update Dino position
-        if (this.dino.y < 150) {
-          this.dino.dy += 0.5; // Gravity
-          this.dino.y += this.dino.dy;
-        }
-        if (this.dino.y > 150) {
-          this.dino.y = 150;
-          this.dino.dy = 0;
-        }
-
-        // Move and spawn obstacles
-        if (Math.random() < 0.02) {
-          this.spawnObstacle();
-        }
-        this.moveObstacles();
-        this.checkCollisions();
-
-        // Draw Dino
-        this.ctx.fillStyle = 'green';
-        this.ctx.fillRect(this.dino.x, this.dino.y, this.dino.width, this.dino.height);
-
-        // Draw obstacles
-        this.ctx.fillStyle = 'brown';
-        for (var i = 0; i < this.obstacles.length; i++) {
-          var obstacle = this.obstacles[i];
-          this.ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-        }
-
-        // Draw score
-        this.ctx.fillStyle = 'black';
-        this.ctx.font = '20px Arial';
-        this.ctx.fillText('Score: ' + this.score, 10, 30);
-      }
-    };
-
-    window.onload = function() {
-      DinoGame.init();
-    };
-  </script>
+  <!-- Original JavaScript für das Dino-Spiel -->
+  <script src="https://cdn.jsdelivr.net/gh/MicrosoftEdge/DinoGame@latest/dino.js"></script>
 </head>
 <body>
   <header>
@@ -166,7 +60,9 @@
 
   <section class="play-now">
     <h2>Play the Game Now</h2>
-    <div class="game-container"></div>
+    <div class="game-container">
+      <!-- Canvas wird von JavaScript erzeugt -->
+    </div>
   </section>
 
   <footer>
